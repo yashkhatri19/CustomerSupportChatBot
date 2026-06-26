@@ -74,7 +74,7 @@ function App() {
     const promptCache = inputMessage;
     setInputMessage("");
     setLoading(true);
-
+   // Render API call to backend for RAG processing
     try {
      const response = await fetch('https://customersupport-sx37.onrender.com/api/query_support', { 
         method: 'POST',
