@@ -13,15 +13,15 @@ function App() {
   const [activeSessionId, setActiveSessionId] = useState('session-1');
   const [loading, setLoading] = useState(false);
   const [isOpen, setIsOpen] = useState(true);
-  
+
   // Custom authentication & UI states
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [userName, setUserName] = useState("Guest");
-  const [isSidebarVisible, setIsSidebarVisible] = useState(true); 
-  const [showAuthModal, setShowAuthModal] = useState(false); 
-  
+  const [isSidebarVisible, setIsSidebarVisible] = useState(true);
+  const [showAuthModal, setShowAuthModal] = useState(false);
+
   // CHATGPT/GEMINI STYLE TABS: 'login' or 'register'
-  const [authTab, setAuthTab] = useState('login'); 
+  const [authTab, setAuthTab] = useState('login');
 
   // Modal form input fields caching
   const [emailInput, setEmailInput] = useState("");
@@ -58,7 +58,7 @@ function App() {
 
     const currentTime = new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
     const userMessage = { text: inputMessage, sender: 'user', time: currentTime };
-    
+
     let updatedTitle = currentConversation.title;
     if (currentConversation.messages.length <= 1) {
       updatedTitle = inputMessage.length > 22 ? inputMessage.substring(0, 20) + "..." : inputMessage;
@@ -74,25 +74,25 @@ function App() {
     const promptCache = inputMessage;
     setInputMessage("");
     setLoading(true);
-   // Render API call to backend for RAG processing
+    // Render API call to backend for RAG processing
     try {
       // 1. Pehle yeh pata lagao ki frontend local chal raha hai ya live
-const backendUrl = window.location.hostname === "localhost" 
-    ? "http://localhost:5000/api/query_support" 
-    : "https://customersupport-sx37.onrender.com/api/query_support";
+      const backendUrl = window.location.hostname === "localhost"
+        ? "http://localhost:5000/api/query_support"
+        : "https://customersupport-sx37.onrender.com/api/query_support";
 
-// 2. Ab fetch ke andar poora link likhne ki jagah bas 'backendUrl' variable daal do
-const response = await fetch(backendUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ prompt: promptCache }),
-});
+      // 2. Ab fetch ke andar poora link likhne ki jagah bas 'backendUrl' variable daal do
+      const response = await fetch(backendUrl, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ prompt: promptCache }),
+      });
 
       if (!response.ok) throw new Error("Server disconnected");
       const data = await response.json();
-      
-      const botMessage = { 
-        text: data.reply || "Processed successfully. Let me know if you need deeper data mapping.", 
+
+      const botMessage = {
+        text: data.reply || "Processed successfully. Let me know if you need deeper data mapping.",
         sender: 'bot',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
@@ -121,7 +121,7 @@ const response = await fetch(backendUrl, {
   // Modern Unified Auth Form Submission Handler
   const handleAuthSubmit = (e) => {
     e.preventDefault();
-    
+
     if (authTab === 'login') {
       if (!emailInput || !passwordInput) {
         alert("Please enter both email and password.");
@@ -161,9 +161,9 @@ const response = await fetch(backendUrl, {
 
   return (
     <div style={styles.appViewContainer}>
-      
+
       {/* LEFT SIDEBAR PANEL */}
-      <aside 
+      <aside
         style={{
           ...styles.chatGptSidebar,
           marginLeft: isSidebarVisible ? '0px' : '-260px',
@@ -174,14 +174,14 @@ const response = await fetch(backendUrl, {
         <button style={styles.newChatButton} onClick={handleCreateNewChat}>
           <span style={styles.plusIcon}>+</span> New chat
         </button>
-        
+
         <div style={styles.historyScrollFeed}>
           <div style={styles.sidebarSectionHeading}>Recent Threads</div>
           {conversations.map((chat) => {
             const isActive = chat.id === activeSessionId;
             return (
-              <div 
-                key={chat.id} 
+              <div
+                key={chat.id}
                 onClick={() => { setActiveSessionId(chat.id); setIsOpen(true); }}
                 style={{
                   ...styles.historyItemNode,
@@ -199,8 +199,8 @@ const response = await fetch(backendUrl, {
         </div>
 
         {/* User Footer Node */}
-        <div 
-          style={styles.sidebarUserFooter} 
+        <div
+          style={styles.sidebarUserFooter}
           onClick={() => setIsSidebarVisible(false)}
           title="Click to close panel"
         >
@@ -214,7 +214,7 @@ const response = await fetch(backendUrl, {
 
       {/* RIGHT MAIN CONTAINER */}
       <div style={styles.mainCanvasLayout}>
-        
+
         {/* Navigation Bar Header */}
         <nav style={styles.navbar}>
           <div style={styles.logoGroup}>
@@ -223,7 +223,7 @@ const response = await fetch(backendUrl, {
             )}
             <div style={styles.logo}>SupportAI</div>
           </div>
-          
+
           {/* ChatGPT Style Dual Button Layout inside Header */}
           <div style={styles.navAuthWrapper}>
             {isLoggedIn ? (
@@ -232,14 +232,14 @@ const response = await fetch(backendUrl, {
               </button>
             ) : (
               <div style={{ display: 'flex', gap: '12px' }}>
-                <button 
+                <button
                   type="button"
                   onClick={() => { setAuthTab('login'); setShowAuthModal(true); }}
                   style={styles.loginBtn}
                 >
                   Log In
                 </button>
-                <button 
+                <button
                   type="button"
                   onClick={() => { setAuthTab('register'); setShowAuthModal(true); }}
                   style={styles.registerBtn}
@@ -257,7 +257,7 @@ const response = await fetch(backendUrl, {
           <p style={styles.heroSubtitle}>
             Provides 24*7 intelligent customer support with lightning-fast AI responses.
           </p>
-          
+
           {/* WHITE BACKGROUND / BLACK TEXT HERO BUTTON */}
           <button style={styles.heroButton} onClick={() => setIsOpen(true)}>
             Click Here to Ask Anything
@@ -304,11 +304,11 @@ const response = await fetch(backendUrl, {
               </div>
 
               <form onSubmit={handleSendMessage} style={styles.chatFooterForm}>
-                <input 
-                  type="text" 
+                <input
+                  type="text"
                   value={inputMessage}
                   onChange={(e) => setInputMessage(e.target.value)}
-                  placeholder="Type a response..." 
+                  placeholder="Type a response..."
                   style={styles.chatInput}
                   disabled={loading}
                 />
@@ -330,12 +330,12 @@ const response = await fetch(backendUrl, {
       {showAuthModal && (
         <div style={styles.modalOverlay} onClick={() => setShowAuthModal(false)}>
           <div style={styles.modalContentCard} onClick={(e) => e.stopPropagation()}>
-            
+
             <button style={styles.modalCornerCloseX} onClick={() => setShowAuthModal(false)}>&times;</button>
-            
+
             {/* Dynamic Sliding Tabs headers */}
             <div style={styles.tabsHeaderContainer}>
-              <button 
+              <button
                 type="button"
                 onClick={() => setAuthTab('login')}
                 style={{
@@ -346,7 +346,7 @@ const response = await fetch(backendUrl, {
               >
                 Sign In
               </button>
-              <button 
+              <button
                 type="button"
                 onClick={() => setAuthTab('register')}
                 style={{
@@ -362,16 +362,16 @@ const response = await fetch(backendUrl, {
             <p style={styles.modalSubheadingText}>
               {authTab === 'login' ? "Welcome back! Enter your details to continue dashboard workflows." : "Create your free account today to track secure prompt feeds."}
             </p>
-            
+
             <form onSubmit={handleAuthSubmit} style={styles.modalFormLayout}>
-              
+
               {/* Extra Register Name field exposed if state condition hits */}
               {authTab === 'register' && (
                 <div style={styles.inputFieldContainer}>
                   <label style={styles.inputLabelElement}>Your Full Name</label>
-                  <input 
-                    type="text" 
-                    placeholder="John Doe" 
+                  <input
+                    type="text"
+                    placeholder="John Doe"
                     value={registerNameInput}
                     onChange={(e) => setRegisterNameInput(e.target.value)}
                     style={styles.modalFormInputItem}
@@ -382,9 +382,9 @@ const response = await fetch(backendUrl, {
 
               <div style={styles.inputFieldContainer}>
                 <label style={styles.inputLabelElement}>Email Address</label>
-                <input 
-                  type="email" 
-                  placeholder="name@company.com" 
+                <input
+                  type="email"
+                  placeholder="name@company.com"
                   value={emailInput}
                   onChange={(e) => setEmailInput(e.target.value)}
                   style={styles.modalFormInputItem}
@@ -394,9 +394,9 @@ const response = await fetch(backendUrl, {
 
               <div style={styles.inputFieldContainer}>
                 <label style={styles.inputLabelElement}>Password</label>
-                <input 
-                  type="password" 
-                  placeholder="••••••••" 
+                <input
+                  type="password"
+                  placeholder="••••••••"
                   value={passwordInput}
                   onChange={(e) => setPasswordInput(e.target.value)}
                   style={styles.modalFormInputItem}
@@ -408,9 +408,9 @@ const response = await fetch(backendUrl, {
               {authTab === 'register' && (
                 <div style={styles.inputFieldContainer}>
                   <label style={styles.inputLabelElement}>Confirm Password</label>
-                  <input 
-                    type="password" 
-                    placeholder="••••••••" 
+                  <input
+                    type="password"
+                    placeholder="••••••••"
                     value={confirmPasswordInput}
                     onChange={(e) => setConfirmPasswordInput(e.target.value)}
                     style={styles.modalFormInputItem}
@@ -431,7 +431,6 @@ const response = await fetch(backendUrl, {
                 <span>Already have an account? <span style={styles.footerLinkAction} onClick={() => setAuthTab('login')}>Log In here</span></span>
               )}
             </div>
-
           </div>
         </div>
       )}
@@ -621,7 +620,7 @@ const styles = {
   },
   heroTitle: { fontSize: '52px', fontWeight: '800', letterSpacing: '-1.5px', lineHeight: '1.15', margin: '0 0 20px 0', color: '#ffffff' },
   heroSubtitle: { fontSize: '17px', color: '#94a3b8', maxWidth: '540px', lineHeight: '1.6', margin: '0 0 32px 0' },
-  
+
   // FIXED HERO BUTTON DESIGN MATRIX (PURE WHITE BACKGROUND WITH BLACK TEXT)
   heroButton: {
     background: '#ffffff',
@@ -635,7 +634,7 @@ const styles = {
     outline: 'none',
     boxShadow: '0 10px 25px rgba(255,255,255,0.1)'
   },
-  
+
   widgetWrapper: { position: 'absolute', bottom: '30px', right: '40px', zIndex: 99 },
   chatWindow: {
     width: '380px',
@@ -664,7 +663,7 @@ const styles = {
   chatInput: { flexGrow: 1, border: 'none', background: 'transparent', fontSize: '14px', color: '#1e293b', outline: 'none' },
   sendBtn: { background: '#1e293b', color: '#ffffff', border: 'none', padding: '8px 14px', borderRadius: '6px', fontSize: '13px', fontWeight: '600', cursor: 'pointer' },
   launcherIcon: { width: '56px', height: '56px', borderRadius: '50%', background: '#3b82f6', color: '#ffffff', border: 'none', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer', boxShadow: '0 8px 24px rgba(59, 130, 246, 0.4)' },
-  
+
   // UPGRADED AUTHENTICATION MODAL DESIGN TOKENS
   modalOverlay: {
     position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh',
