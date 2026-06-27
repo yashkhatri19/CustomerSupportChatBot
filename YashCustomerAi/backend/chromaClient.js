@@ -13,6 +13,7 @@ export async function initChroma() {
         return collection;
     } catch (error) {
         console.error("Failed to connect to ChromaDB:", error);
+        return null;
     }
 }
 

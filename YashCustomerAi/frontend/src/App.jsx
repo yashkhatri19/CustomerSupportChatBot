@@ -76,11 +76,17 @@ function App() {
     setLoading(true);
    // Render API call to backend for RAG processing
     try {
-     const response = await fetch('https://customersupport-sx37.onrender.com/api/query_support', { 
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ prompt: promptCache }),
-      });
+      // 1. Pehle yeh pata lagao ki frontend local chal raha hai ya live
+const backendUrl = window.location.hostname === "localhost" 
+    ? "http://localhost:5000/api/query_support" 
+    : "https://customersupport-sx37.onrender.com/api/query_support";
+
+// 2. Ab fetch ke andar poora link likhne ki jagah bas 'backendUrl' variable daal do
+const response = await fetch(backendUrl, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ prompt: promptCache }),
+});
 
       if (!response.ok) throw new Error("Server disconnected");
       const data = await response.json();

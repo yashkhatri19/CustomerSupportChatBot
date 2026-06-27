@@ -8,12 +8,15 @@ dotenv.config();
 
 const app = express();
 app.use(cors({
-    
+    origin: ["http://localhost:5173", 
+        "https://customer-support-guru19.vercel.app", 
+        "https://customer-support-git-main-guru19.vercel.app"],
+    credentials: true
 }));
    
 app.use(express.json());
 
-let chatCollection;
+let chatCollection = null; // This will hold the ChromaDB collection instance
 
 // Initialize ChromaDB
 initChroma().then((collection) => {
