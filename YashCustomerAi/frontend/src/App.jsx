@@ -255,7 +255,7 @@ const response = await fetch(backendUrl, {
         <main style={styles.heroSection}>
           <h1 style={styles.heroTitle}>Transform Customer Support With AI</h1>
           <p style={styles.heroSubtitle}>
-            Provide 24/7 intelligent customer support with lightning-fast AI responses.
+            Provides 24/7 intelligent customer support with lightning-fast AI responses.
           </p>
           
           {/* WHITE BACKGROUND / BLACK TEXT HERO BUTTON */}
