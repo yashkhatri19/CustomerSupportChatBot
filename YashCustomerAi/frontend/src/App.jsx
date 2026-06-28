@@ -143,7 +143,8 @@ function App() {
         sender: 'bot',
         time: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
       };
-
+      
+      // Append the bot's response to the current conversation
       setConversations(prev => prev.map(chat => {
         if (chat.id === activeSessionId) {
           return { ...chat, messages: [...(chat.messages || []), botMessage] };
