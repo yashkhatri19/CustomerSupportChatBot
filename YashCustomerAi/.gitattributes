@@ -1,4 +1,7 @@
-*.js linguist-language=React
-*.jsx linguist-language=React
-*.css linguist-vendored
-*.html linguist-vendored
+# HTML aur CSS ko normal rehne do, bas unhe detect mat hone do
+*.html linguist-detectable=false
+*.css linguist-detectable=false
+
+# Pure project ko forcefully JavaScript/React dikhane ke liye
+*.js linguist-language=JavaScript
+*.jsx linguist-language=JavaScript
