@@ -111,7 +111,8 @@ function App() {
     if (!currentConversation.messages || currentConversation.messages.length <= 1) {
       updatedTitle = inputMessage.length > 22 ? inputMessage.substring(0, 20) + "..." : inputMessage;
     }
-
+     
+    // Update the conversation with the new user message and possibly updated title
     setConversations(prev => prev.map(chat => {
       if (chat.id === activeSessionId) {
         return { ...chat, title: updatedTitle, messages: [...(chat.messages || []), userMessage] };
