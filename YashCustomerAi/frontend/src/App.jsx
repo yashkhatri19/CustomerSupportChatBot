@@ -188,6 +188,7 @@ function App() {
         alert("Passwords do not match!");
         return;
       }
+      // update the local storage with new user data
       if (localUsersDb[normalizedEmail]) {
         alert("This email is already registered! Please log in instead.");
         return;
