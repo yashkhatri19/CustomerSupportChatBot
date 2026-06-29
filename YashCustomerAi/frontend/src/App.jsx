@@ -203,7 +203,7 @@ function App() {
     setIsLoggedIn(true);
     setUserName(computedName);
     setCurrentUserEmail(normalizedEmail);
-    
+    // persist the login state in localStorage
     localStorage.setItem("isLoggedIn", "true");
     localStorage.setItem("userName", computedName);
     localStorage.setItem("currentUserEmail", normalizedEmail);
