@@ -172,7 +172,7 @@ function App() {
     const normalizedEmail = emailInput.toLowerCase().trim();
     const localUsersDb = JSON.parse(localStorage.getItem("app_users_database")) || {};
     let computedName = "Guest";
-
+    // Handle login and registration logic
     if (authTab === 'login') {
       if (!localUsersDb[normalizedEmail]) {
         alert("Account not found! This email is not registered. Please switch to 'Create Account' first.");
