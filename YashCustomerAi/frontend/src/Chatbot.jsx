@@ -78,7 +78,7 @@ export default function Chatbot() {
           <div className="chat-header">
             AI Support Assistant
           </div>
-
+          // Display the chat messages and a loading indicator when the bot is typing
           <div className="chat-body">
             {messages.map((msg, index) => (
               <div
