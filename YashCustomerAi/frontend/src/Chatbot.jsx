@@ -95,7 +95,7 @@ export default function Chatbot() {
               </div>
             )}
           </div>
-
+            // Input field for user messages and a send button
           <div className="chat-input">
             <input
               type="text"
