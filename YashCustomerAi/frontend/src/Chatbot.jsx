@@ -40,7 +40,7 @@ export default function Chatbot() {
           }),
         }
       );
-
+  
       const data = await response.json();
 
       setMessages((prev) => [
@@ -63,7 +63,7 @@ export default function Chatbot() {
 
     setLoading(false);
   };
-
+  // Render the chatbot UI
   return (
     <>
       <button
