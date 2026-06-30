@@ -9,7 +9,7 @@ export default function Chatbot() {
       sender: "bot",
     },
   ]);
-
+   // State for user input and loading status
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
 
