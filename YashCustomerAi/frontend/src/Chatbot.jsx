@@ -12,7 +12,7 @@ export default function Chatbot() {
    // State for user input and loading status
   const [input, setInput] = useState("");
   const [loading, setLoading] = useState(false);
-
+  
   const sendMessage = async () => {
     if (!input.trim()) return;
 
@@ -20,13 +20,13 @@ export default function Chatbot() {
       text: input,
       sender: "user",
     };
-
+  
     setMessages((prev) => [...prev, userMessage]);
 
     const currentInput = input;
     setInput("");
     setLoading(true);
-
+   // Send the message to the backend API and handle the response
     try {
       const response = await fetch(
         "http://localhost:5000/api/chat",
